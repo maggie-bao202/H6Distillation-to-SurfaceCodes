@@ -3,28 +3,24 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "h6-distillation-deq"
-version = "0.1.0"
-description = "Magic-H6 [[6,2,2]] level-1 distillation circuit: Stim generation (for Bloqade Studio) and .deq export."
+name = "h6distillation-to-surfacecodes"
+version = "0.2.0"
+description = "Notebook: Magic-H6 [[6,2,2]] distillation of two |+> states, teleported into rotated surface code blocks (via LightStim)."
 requires-python = ">=3.10"
 dependencies = [
     "stim>=1.15.0",
     "numpy>=1.20.0",
-    # LightStim is not on PyPI. This pins the Light-DEQ branch, which is
-    # where lightstim.deq.export_deq (used by scripts/generate_circuits.py)
-    # currently lives. For local development against a sibling checkout
-    # instead, see README.md.
-    "lightstim @ git+ssh://git@github.com/maggie-bao202/LightStim.git@Light-DEQ",
+    # LightStim is not on PyPI. For local development against a sibling
+    # checkout instead, see README.md.
+    "lightstim @ git+ssh://git@github.com/maggie-bao202/LightStim.git@feat/h6-distillation-protocol",
 ]
 
 [project.optional-dependencies]
-deq = [
-    "deq>=0.4",
-    "deqagram>=0.4",
-]
-dev = [
-    "pytest",
+notebook = [
+    "matplotlib",
+    "jupyter",
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+# Notebook-only repo: no importable package.
+packages = []
